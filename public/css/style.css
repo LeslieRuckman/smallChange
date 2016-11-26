@@ -2,13 +2,34 @@
 /* Custom CSS */
 /**************/
 
+/*
+font-family: 'Abril Fatface', cursive;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Open Sans Condensed', sans-serif; */
+
 body{
-	background-color: #f3f3f1;
-	color: #3f4953;
+	background-color: #263d8d;
+	color: #fabfbb;
+}
+
+li a {
+		font-family: 'Open Sans', sans-serif;
+		/*float: left;*/
+    display: inline;
+    width: 90px;
+		list-style-type: none;
+		color: #fff;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 70px;
+}
+
+li a:hover {
+    background-color: #111;
 }
 
 h1 {
-	color: #f25a4f;
+	color: #fabfbb;
 }
 
 .animal {
@@ -17,6 +38,28 @@ h1 {
 
 .animal img {
 	width: 100%;
+}
+
+#navi{
+padding-top: 20px;
+padding-bottom: 20px;
+border-bottom: 1px solid #fff;
+}
+
+#naviItem{
+	padding-top: 20px;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	display: inline;
+	/*float: left;*/
+	width: 90px;
+	list-style-type: none;
+}
+
+#title{
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	color: #fff;
 }
 
 #animal-holder{

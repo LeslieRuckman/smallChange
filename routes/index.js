@@ -13,7 +13,7 @@ var Animal = require("../models/model.js");
  * @return {Object} json
  */
 router.get('/', function(req, res) {
-  
+
   var jsonData = {
   	'name': 'pets-of-nyc',
   	'api-status':'OK'
@@ -28,6 +28,10 @@ router.get('/pets', function(req,res){
   res.render('pets.html');
 })
 
+router.get('/home', function(req,res){
+  res.render('home.html');
+})
+
 // /**
 //  * POST '/api/create'
 //  * Receives a POST request of the new user and location, saves to db, responds back
@@ -40,7 +44,7 @@ router.post('/api/create', function(req, res){
     console.log('the data we received is --> ')
     console.log(req.body);
 
-    
+
     // pull out the information from the req.body
     var name = req.body.name;
     var age = req.body.age;
@@ -89,7 +93,7 @@ router.post('/api/create', function(req, res){
       var animal = new Animal(animalObj);
 
       // now, save that animal instance to the database
-      // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
+      // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save
       animal.save(function(err,data){
         // if err saving, respond back with error
         if (err){
@@ -108,9 +112,9 @@ router.post('/api/create', function(req, res){
 
         return res.json(jsonData);
 
-      }) 
+      })
 
-    }); 
+    });
 });
 
 // /**
@@ -127,7 +131,7 @@ router.get('/api/get/:id', function(req, res){
   // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
   Animal.findById(requestedId, function(err,data){
 
-    // if err or no user found, respond with error 
+    // if err or no user found, respond with error
     if(err || data == null){
       var error = {status:'ERROR', message: 'Could not find that animal'};
        return res.json(error);
@@ -140,7 +144,7 @@ router.get('/api/get/:id', function(req, res){
     }
 
     return res.json(jsonData);
-  
+
   })
 })
 
@@ -154,18 +158,18 @@ router.get('/api/get', function(req, res){
 
   // mongoose method to find all, see http://mongoosejs.com/docs/api.html#model_Model.find
   Animal.find(function(err, data){
-    // if err or no animals found, respond with error 
+    // if err or no animals found, respond with error
     if(err || data == null){
       var error = {status:'ERROR', message: 'Could not find animals'};
       return res.json(error);
     }
 
-    // otherwise, respond with the data 
+    // otherwise, respond with the data
 
     var jsonData = {
       status: 'OK',
       animals: data
-    } 
+    }
 
     res.json(jsonData);
 
@@ -188,7 +192,7 @@ router.post('/api/update/:id', function(req, res){
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var name, age, weight, breed, url, location; 
+    var name, age, weight, breed, url, location;
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -255,7 +259,7 @@ router.post('/api/update/:id', function(req, res){
       console.log('the data to update is ' + JSON.stringify(dataToUpdate));
 
       // now, update that animal
-      // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate  
+      // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
       Animal.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
         // if err saving, respond back with error
         if (err){
@@ -276,7 +280,7 @@ router.post('/api/update/:id', function(req, res){
 
       })
 
-    });     
+    });
 
 })
 
