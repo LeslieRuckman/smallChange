@@ -32,6 +32,10 @@ router.get('/home', function(req,res){
   res.render('home.html');
 })
 
+router.get('/makesmallchange', function(req,res){
+  res.render('start.html');
+})
+
 // /**
 //  * POST '/api/create'
 //  * Receives a POST request of the new user and location, saves to db, responds back
