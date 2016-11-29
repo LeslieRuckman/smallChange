@@ -36,6 +36,18 @@ router.get('/makesmallchange', function(req,res){
   res.render('start.html');
 })
 
+router.get('/select', function(req,res){
+  res.render('select.html');
+})
+
+router.get('/register', function(req,res){
+  res.render('form.html');
+})
+
+router.get('/congrats', function(req,res){
+  res.render('congrats.html');
+})
+
 // /**
 //  * POST '/api/create'
 //  * Receives a POST request of the new user and location, saves to db, responds back

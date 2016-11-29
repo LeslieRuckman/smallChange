@@ -42,8 +42,13 @@ a {
 	background-color: #eee;
 }
 
+.col-md-3:hover{
+	background-color: #eee;
+}
+
 .col-md-12{
 align-items: center;
+padding-top: 20px;
 display: inline;
 }
 
@@ -92,7 +97,6 @@ border-bottom: 1px solid #000;
 }
 
 #section-title{
-	text-align: center;
 	font-family: 'Abril Fatface', cursive;
 	color: #000;
 }
