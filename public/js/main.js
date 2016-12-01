@@ -3,18 +3,18 @@ var map; // global map variable
 var markers = []; // array to hold map markers
 
 function init() {
-  
+
   // set some default map details, initial center point, zoom and style
   var mapOptions = {
     center: new google.maps.LatLng(40.74649,-74.0094), // NYC
     zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  
+
   // create the map and reference the div#map-canvas container
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  
-  // get the animals (ajax) 
+
+  // get the animals (ajax)
   // and render them on the map
   renderPlaces();
 }
@@ -98,7 +98,7 @@ jQuery("#addForm").submit(function(e){
 
 // 	// make sure we have a location
 // 	if(!location || location=="") return alert('We need a location!');
-      
+
 // 	// POST the data from above to our API create route
 //   jQuery.ajax({
 //   	url : '/api/create',
@@ -132,7 +132,7 @@ jQuery("#addForm").submit(function(e){
 //   		alert("something went wrong");
 //   		console.error(err);
 //   	}
-//   }); 
+//   });
 
 // 	// prevents the form from submitting normally
 //   e.preventDefault();
@@ -161,7 +161,7 @@ var renderPlaces = function() {
 			for(var i=0;i<animals.length;i++){
 
 				var latLng = {
-					lat: animals[i].location.geo[1], 
+					lat: animals[i].location.geo[1],
 					lng: animals[i].location.geo[0]
 				}
 
@@ -173,7 +173,7 @@ var renderPlaces = function() {
 				});
 
 				bindInfoWindow(marker, map, infowindow, '<b>'+animals[i].name + "</b> ("+animals[i].breed+") <br>" + animals[i].location.name);
-				
+
 				// keep track of markers
 				markers.push(marker);
 			}
@@ -202,9 +202,9 @@ jQuery("#editForm").submit(function(e){
 
 	// make sure we have a location
 	if(!location || location=="") return alert('We need a location!');
-     
+
   console.log(id);
-      
+
 	// POST the data from above to our API create route
   jQuery.ajax({
   	url : '/api/update/'+id,
@@ -240,7 +240,7 @@ jQuery("#editForm").submit(function(e){
   		alert("something went wrong");
   		console.error(err);
   	}
-  }); 
+  });
 
 	// prevents the form from submitting normally
   e.preventDefault();
@@ -334,7 +334,7 @@ function deleteAnimal(event){
 function clearMarkers(){
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null); // clears the markers
-  }	
+  }
 }
 
 // when page is ready, initialize the map!
@@ -342,9 +342,3 @@ google.maps.event.addDomListener(window, 'load', init);
 
 
 //window.addEventListener('load',init);
-
-
-
-
-
-

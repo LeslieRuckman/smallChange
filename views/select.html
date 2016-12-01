@@ -24,65 +24,109 @@
 <![endif]-->
 </head>
 
-<body>
+<body id="page3">
 
     <div class="container">
-        <!-- Top Navigation-->
-        <div class="col-md-1">
-            <ul>
-                <li id="naviItem"><a href="placeholder">About</a></li>
-            </ul>
-        </div>
 
-        <div class="col-md-9">
-            <h1 id="title">Small Change</h1>
-        </div>
+        <div class="row">
+            <div class="col-md-12" id="section">
+                <!-- Top Navigation-->
+                <div class="col-md-1">
+                    <ul>
+                        <li id="naviItem"><a href="placeholder">About</a></li>
+                    </ul>
+                </div>
 
-        <div class="col-md-1">
-            <ul>
-                <li id="naviItem"><a href="placeholder">Log-In</a></li>
-            </ul>
+                <div class="col-md-9">
+                    <h1 id="title">Small Change</h1>
+                </div>
+
+                <div class="col-md-1">
+                    <ul>
+                        <li id="naviItem"><a href="placeholder">Log-In</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                    <ul>
+                        <li id="naviItem"><a href="placeholder">Sign-Up</a></li>
+                    </ul>
+                </div>
+                <br>
+                <br>
+            </div>
         </div>
-        <div class="col-md-1">
-            <ul>
-                <li id="naviItem"><a href="placeholder">Sign-Up</a></li>
-            </ul>
-        </div>
-        <br>
-        <br>
 
         <!-- Close top Navigation -->
         <div class="row">
-            <div class="col-md-4">
-                <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                      Contribute 0.50¢ / Purchase
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="radio">
-                    <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                Contribute .05¢ / $1.00
-              </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">$</div>
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                            <div class="input-group-addon">.00</div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <div class="col-md-12" id="section">
+                <br>
+                <h4 class="text-center lead">Select the amount you would like SmallChange to collect:</h4>
+                <br>
 
+                <div class="row" style="align-items:center; text-align:center;">
+
+                    <div class="col-md-4">
+                        <br>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="radio">
+                            <label id="select">
+                      <input type="radio" name="optionsRadios" class="btn btn-lg btn-block" id="optionsRadios1" value="option1" checked>
+                        Contribute $0.50 / Purchase
+                    </label>
+                        </div>
+                        <br>
+                        <div class="radio">
+                            <label id="select">
+                    <input type="radio" name="optionsRadios" class="btn btn-lg btn-block" id="optionsRadios2" value="option2">
+                      Contribute $.05 / $1.00
+                  </label>
+                        </div>
+                        <br>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="exampleInputAmount" id="select">Other Amount</label>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-addon">$</div>
+                                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="USD">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                    </div>
+
+                </div>
+                <div class="row">
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                    <div class="col-sm-4">
+                        <br>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="/register">
+                            <button type="submit" class="btn btn-default btn-lg btn-block">SUBMIT</button>
+                        </a>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-sm-4">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- </div> -->
 
         <!-- closing the container -->
     </div>
@@ -115,5 +159,20 @@
 
 <!-- CUSTOM JS -->
 <script src="js/main.js"></script>
+<script type="text/javascript">
+    // With JQuery
+    $('#ex1').slider({
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+
+    // Without JQuery
+    var slider = new Slider('#ex1', {
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+</script>
 
 </html>

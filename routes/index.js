@@ -4,7 +4,7 @@ var mongoose = require('mongoose'); // mongoDB library
 var geocoder = require('geocoder'); // geocoder library
 
 // our db model
-var Animal = require("../models/model.js");
+var Organization = require("../models/model.js");
 
 /**
  * GET '/'
@@ -15,12 +15,14 @@ var Animal = require("../models/model.js");
 router.get('/', function(req, res) {
 
   var jsonData = {
-  	'name': 'pets-of-nyc',
+  	'name': 'ngos-for-good',
   	'api-status':'OK'
   }
 
   // respond with json data
-  res.json(jsonData)
+  // res.json(jsonData)
+  res.render('home.html');
+
 });
 
 // simple route to show the pets html
@@ -28,6 +30,7 @@ router.get('/pets', function(req,res){
   res.render('pets.html');
 })
 
+ // demo walk through webages
 router.get('/home', function(req,res){
   res.render('home.html');
 })
@@ -48,6 +51,53 @@ router.get('/congrats', function(req,res){
   res.render('congrats.html');
 })
 
+router.get('/mysmallchange', function(req,res){
+  res.render('dashboard.html');
+})
+
+
+// API Display Page
+
+router.get('/apiview', function(req,res){
+  res.render('orgDirectory.html');
+})
+
+// API Add an Organization Page
+
+router.get('/apiadd', function(req,res){
+  res.render('orgDirectoryAdd.html');
+})
+
+// Edit Existing Information Page
+
+router.get('/edit/:id', function(req,res){
+
+  var requestedId = req.params.id;
+
+  Organization.findById(requestedId,function(err,data){
+    if(err){
+      var error = {
+        status: "ERROR",
+        message: err
+      }
+      return res.json(err)
+    }
+
+    console.log(data);
+
+    var viewData = {
+      pageTitle: "Edit " + data.name,
+      orgz: data
+    }
+
+    res.render('edit.html',viewData);
+
+  })
+
+})
+
+
+
 // /**
 //  * POST '/api/create'
 //  * Receives a POST request of the new user and location, saves to db, responds back
@@ -60,78 +110,41 @@ router.post('/api/create', function(req, res){
     console.log('the data we received is --> ')
     console.log(req.body);
 
+var orgObj = {
+    name: req.body.name,
+    category: req.body.category.split(","),
+    tags: req.body.tags.split(","), // split string into array
+    rating: req.body.rating,
+    link: req.body.link
+  }
 
-    // pull out the information from the req.body
-    var name = req.body.name;
-    var age = req.body.age;
-    var tags = req.body.tags.split(","); // split string into array
-    var weight = req.body.weight;
-    var breed = req.body.breed;
-    var url = req.body.url;
-    var location = req.body.location;
-
-    // hold all this data in an object
-    // this object should be structured the same way as your db model
-    var animalObj = {
-      name: name,
-      age: age,
-      tags: tags,
-      weight: weight,
-      breed: breed,
-      url: url
-    };
-
-    // if there is no location, return an error
-    if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
-
-    // now, let's geocode the location
-    geocoder.geocode(location, function (err,data) {
+    // now, let's save it to the database
+    // create a new organization model instance, passing in the object we've created
+    var orgz = new Organization(orgObj);
 
 
-      // if we get an error, or don't have any results, respond back with error
-      if (!data || data==null || err || data.status == 'ZERO_RESULTS'){
-        var error = {status:'ERROR', message: 'Error finding location'};
-        return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
+
+  orgz.save(function(err,data){
+    if(err){
+      var error = {
+        status: "ERROR",
+        message: err
       }
+      return res.json(err)
+    }
 
-      // else, let's pull put the lat lon from the results
-      var lon = data.results[0].geometry.location.lng;
-      var lat = data.results[0].geometry.location.lat;
+    var jsonData = {
+      status: "OK",
+      orgz: data
+    }
 
-      // now, let's add this to our animal object from above
-      animalObj.location = {
-        geo: [lon,lat], // need to put the geo co-ordinates in a lng-lat array for saving
-        name: data.results[0].formatted_address // the location name
-      }
+    return res.json(jsonData);
 
-      // now, let's save it to the database
-      // create a new animal model instance, passing in the object we've created
-      var animal = new Animal(animalObj);
+  })
 
-      // now, save that animal instance to the database
-      // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save
-      animal.save(function(err,data){
-        // if err saving, respond back with error
-        if (err){
-          var error = {status:'ERROR', message: 'Error saving animal'};
-          return res.json(error);
-        }
 
-        console.log('saved a new animal!');
-        console.log(data);
-
-        // now return the json data of the new animal
-        var jsonData = {
-          status: 'OK',
-          animal: data
-        }
-
-        return res.json(jsonData);
-
-      })
-
-    });
 });
+
 
 // /**
 //  * GET '/api/get/:id'
@@ -145,18 +158,18 @@ router.get('/api/get/:id', function(req, res){
   var requestedId = req.param('id');
 
   // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
-  Animal.findById(requestedId, function(err,data){
+  Organization.findById(requestedId, function(err,data){
 
     // if err or no user found, respond with error
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find that animal'};
+      var error = {status:'ERROR', message: 'Could not find what you\'re looking for.'};
        return res.json(error);
     }
 
     // otherwise respond with JSON data of the animal
     var jsonData = {
       status: 'OK',
-      animal: data
+      orgz: data
     }
 
     return res.json(jsonData);
@@ -176,7 +189,7 @@ router.get('/api/get', function(req, res){
   Animal.find(function(err, data){
     // if err or no animals found, respond with error
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find animals'};
+      var error = {status:'ERROR', message: 'Could not find organizations'};
       return res.json(error);
     }
 
@@ -184,7 +197,7 @@ router.get('/api/get', function(req, res){
 
     var jsonData = {
       status: 'OK',
-      animals: data
+      orgz: data
     }
 
     res.json(jsonData);
@@ -208,7 +221,7 @@ router.post('/api/update/:id', function(req, res){
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var name, age, weight, breed, url, location;
+    var name, category, tags, rating, link;
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -217,87 +230,50 @@ router.post('/api/update/:id', function(req, res){
       // add to object that holds updated data
       dataToUpdate['name'] = name;
     }
-    if(req.body.age) {
-      age = req.body.age;
+    if(req.body.category) {
+      category = req.body.category.split(",");
       // add to object that holds updated data
-      dataToUpdate['age'] = age;
+      dataToUpdate['category'] = category;
     }
-    if(req.body.weight) {
-      weight = req.body.weight;
-      // add to object that holds updated data
-      dataToUpdate['weight'] = weight;
-    }
-    if(req.body.breed) {
-      breed = req.body.breed;
-      // add to object that holds updated data
-      dataToUpdate['breed'] = breed;
-    }
-    if(req.body.url) {
-      url = req.body.url;
-      // add to object that holds updated data
-      dataToUpdate['url'] = url;
-    }
-
-    var tags = []; // blank array to hold tags
-    if(req.body.tags){
-      tags = req.body.tags.split(","); // split string into array
+    if(req.body.tags) {
+      tags = req.body.tags.split(",");
       // add to object that holds updated data
       dataToUpdate['tags'] = tags;
     }
-
-    if(req.body.location) {
-      location = req.body.location;
+    if(req.body.rating) {
+      rating = req.body.rating;
+      // add to object that holds updated data
+      dataToUpdate['rating'] = rating;
     }
-
-    // if there is no location, return an error
-    if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
-
-    // now, let's geocode the location
-    geocoder.geocode(location, function (err,data) {
-
-
-      // if we get an error, or don't have any results, respond back with error
-      if (!data || data==null || err || data.status == 'ZERO_RESULTS'){
-        var error = {status:'ERROR', message: 'Error finding location'};
-        return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
-      }
-
-      // else, let's pull put the lat lon from the results
-      var lon = data.results[0].geometry.location.lng;
-      var lat = data.results[0].geometry.location.lat;
-
-      // now, let's add this to our animal object from above
-      dataToUpdate['location'] = {
-        geo: [lon,lat], // need to put the geo co-ordinates in a lng-lat array for saving
-        name: data.results[0].formatted_address // the location name
-      }
+    if(req.body.link) {
+      link = req.body.link;
+      // add to object that holds updated data
+      dataToUpdate['link'] = link;
+    }
 
       console.log('the data to update is ' + JSON.stringify(dataToUpdate));
 
       // now, update that animal
       // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
-      Animal.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
+      Organization.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
         // if err saving, respond back with error
         if (err){
-          var error = {status:'ERROR', message: 'Error updating animal'};
+          var error = {status:'ERROR', message: 'Error updating this organization'};
           return res.json(error);
         }
 
-        console.log('updated the animal!');
+        console.log('Your update was made!');
         console.log(data);
 
         // now return the json data of the new person
         var jsonData = {
           status: 'OK',
-          animal: data
+          orgz: data
         }
 
         return res.json(jsonData);
 
       })
-
-    });
-
 })
 
 /**
@@ -312,9 +288,9 @@ router.get('/api/delete/:id', function(req, res){
   var requestedId = req.param('id');
 
   // Mongoose method to remove, http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
-  Animal.findByIdAndRemove(requestedId,function(err, data){
+  Organization.findByIdAndRemove(requestedId,function(err, data){
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find that animal to delete'};
+      var error = {status:'ERROR', message: 'Could not find that organization to delete'};
       return res.json(error);
     }
 

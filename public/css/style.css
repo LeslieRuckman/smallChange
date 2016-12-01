@@ -12,12 +12,25 @@ body{
 	color: #000;
 }
 
-li a {
+li a:hover {
 		font-family: 'Open Sans', sans-serif;
 		/*float: left;*/
     /*width: 90px;*/
 		list-style-type: none;
-		color: #000;
+		text-decoration: none;
+		text-align: center;
+		/*padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 10px;*/
+		display: inline;
+}
+li a:hover {
+		font-family: 'Open Sans', sans-serif;
+		/*float: left;*/
+    /*width: 90px;*/
+		list-style-type: none;
+		text-decoration: none;
+		color: #fff;
 		text-align: center;
 		/*padding-left: 10px;
 		padding-right: 10px;
@@ -29,9 +42,13 @@ h1 {
 	color: #000;
 }
 
-a {
-    text-decoration: none;
+a{
+color: #000;
 }
+
+/*a {
+    text-decoration: none;
+}*/
 
 .col-md-1{
 	margin: 0px;
@@ -42,9 +59,6 @@ a {
 	background-color: #eee;
 }
 
-.col-md-3:hover{
-	background-color: #eee;
-}
 
 .col-md-12{
 align-items: center;
@@ -66,6 +80,42 @@ display: inline;
 	width: 100%;
 }
 
+#page1{
+	background: -webkit-linear-gradient(#25006a, #57006a); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#25006a, #57006a); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#25006a, #57006a); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#25006a, #57006a); /* Standard syntax */
+}
+
+#page2{
+	background: -webkit-linear-gradient(#57006a, #ab0139); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#57006a, #ab0139); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#57006a, #ab0139); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#57006a, #ab0139); /* Standard syntax */
+}
+#page3{
+	background: -webkit-linear-gradient(#ab0139, #ffc999); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#ab0139, #ffc999); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#ab0139, #ffc999); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#ab0139, #ffc999); /* Standard syntax */
+}
+#page4{
+	background: -webkit-linear-gradient(#ffc999, #99fffb); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#ffc999, #99fffb); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#ffc999, #99fffb); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#ffc999, #99fffb); /* Standard syntax */
+}
+#page5{
+	background: -webkit-linear-gradient(#dbfbff, #99fffb); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#dbfbff, #99fffb); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#dbfbff, #99fffb); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#dbfbff, #99fffb); /* Standard syntax */
+}
+
+#dashboardNav{
+	border-bottom:1px solid #000;
+	padding-bottom: 30px;
+}
 
 #naviItem{
 	padding-top: 20px;
@@ -78,7 +128,7 @@ display: inline;
 }
 
 #title{
-	padding-left: 75px;
+	padding-left: 90px;
 	text-align: center;
 	font-family: 'Abril Fatface', cursive;
 	color: #000;
@@ -88,9 +138,33 @@ display: inline;
 padding-top: 20px;
 padding-bottom: 20px;
 border-bottom: 1px solid #000;
+background: #fff;
+opacity: 0.77;
+}
+
+#firstWords{
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	color: #57006a;
+	font-size: 48px;
 }
 
 #bigWords{
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	color: #7cacaa;
+	font-size: 88px;
+}
+
+#select{
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	color: #000;
+	font-size: 20px;
+	padding: 15px;
+}
+
+#optionsRadios{
 	text-align: center;
 	font-family: 'Abril Fatface', cursive;
 	color: #000;
@@ -98,8 +172,141 @@ border-bottom: 1px solid #000;
 
 #section-title{
 	font-family: 'Abril Fatface', cursive;
+	font-size: 20px;
 	color: #000;
 }
+
+#how-it-works{
+	padding-top: 20px;
+	padding-left: 56px;
+	padding-right: 56px;
+	padding-bottom: 56px;
+	text-align: center;
+}
+
+#card{
+	border: 1px solid #000;
+}
+#card:hover{
+	background-color: #c2cacc;
+}
+#card:active{
+	background-color: #c2cacc;
+}
+#card:visited{
+	background-color: #c2cacc;
+}
+
+
+#story-card1{
+	background: #fff;
+	padding:10px;
+	border-top: 7px solid #00dd93;
+}
+
+#story-card{
+	border-top: 3px solid #00dd93;
+	background: #fff;
+	padding:10px;
+}
+
+#story-card:hover{
+	border-top: 3px solid #00dd93;
+	/*background-color: #c2cacc;*/
+	background: #fff;
+	opacity: 0.77;
+}
+#story-card:active{
+	background-color: #c2cacc;
+}
+#story-card:visited{
+	background-color: #c2cacc;
+}
+
+
+#add{
+	margin-top: 25px;
+	background-color: #57006a;
+	border: none;
+}
+#add:visited{
+	margin-top: 25px;
+	background-color: #ab0139;
+	border: none;
+}
+#add:active{
+	margin-top: 25px;
+	background-color: #ab0139;
+	border: none;
+}
+
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+#pie-holder{
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+#label{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+}
+
+#env{
+	padding-top: 20px;
+	background-color: #00dd93;
+	border: none;
+}
+
+#sust{
+	padding-top: 20px;
+	background-color: #3fbcff;
+	border: none;
+}
+
+#hum{
+	padding-top: 20px;
+	background-color: #ffb115;
+	border: none;
+}
+
+#ani{
+	padding-top: 20px;
+	background-color: #ff7fb4;
+	border: none;
+}
+
+#health{
+	padding-top: 20px;
+	background-color: #fffa3f;
+	border: none;
+}
+
+#edu{
+	padding-top: 20px;
+	background-color: #b755ff;
+	border: none;
+}
+
+#monAvg{
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	color: #000;
+	font-size: 48px;
+}
+
+#story-text{
+	padding: 10px;
+	color: #666666;
+}
+
+/*#input1{
+	-webkit-transform: scale(2,2);
+	-moz-transform: scale(2,2);
+	-o-transform: scale(2,2);
+}*/
 
 #animal-holder{
 	margin-top: 75px;
