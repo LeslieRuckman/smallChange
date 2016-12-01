@@ -145,14 +145,14 @@ opacity: 0.77;
 #firstWords{
 	text-align: center;
 	font-family: 'Abril Fatface', cursive;
-	color: #57006a;
+	color: #000;
 	font-size: 48px;
 }
 
 #bigWords{
 	text-align: center;
 	font-family: 'Abril Fatface', cursive;
-	color: #7cacaa;
+	color: #000;
 	font-size: 88px;
 }
 
